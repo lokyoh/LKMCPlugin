@@ -25,7 +25,6 @@ public final class LKMCP extends JavaPlugin {
     public static LKMCP plugin;
     public static boolean drawEnable = true;
     public static boolean dailySignInEnable = true;
-
     public static boolean dailyShopEnable = true;
     public static File prizeFile;
     public static File dailyShopFile;
