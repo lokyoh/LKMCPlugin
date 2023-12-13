@@ -1,0 +1,5 @@
+version: 3
+daily-acquisition-settings:
+  mines: -1
+  crops: -1
+  drops: -1

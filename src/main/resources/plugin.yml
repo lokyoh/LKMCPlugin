@@ -1,0 +1,41 @@
+name: LKMCPlugin
+version: '0.3.2'
+main: com.lkmc.lkmcplugin.LKMCP
+api-version: '1.16'
+authors: [l_o_o_k]
+description: A Minecraft Plugin For Server
+
+commands:
+  lkdraw:
+    description: 抽奖有关的指令
+    usage: /<command> <指令>
+    permission: lkmcp.admin
+    permission-message: 你没有权限执行它.
+  lkgive:
+    description: 给予玩家物品
+    usage: /<command> <玩家> <物品> <数量>
+    permission: lkmcp.admin
+    permission-message: 你没有权限执行它.
+  signin:
+    description: 签到相关指令
+    usage: /<command> <指令>
+    permission: lkmcp.player
+  lkquest:
+    description: 任务相关指令
+    usage: /<command> <指令>
+    permission: lkmcp.player
+  lkshop:
+    description: 系统商店相关指令
+    usage: /<command> <指令>
+    permission: lkmcp.player
+  lkbase:
+    description: 基础指令
+    usage: /<command> <指令>
+    permission: lkmcp.player
+permissions:
+  lkmcp.admin:
+    description: 管理指令
+    default: op
+  lkmcp.player:
+    description: 玩家指令
+    default: true

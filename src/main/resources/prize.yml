@@ -1,0 +1,69 @@
+#物品给予参数
+#奖品种类 type: 'item'
+#概率值 rate: <数字>
+#展示名 display: <字符串>
+#物品ID id: <字符串> 原版物品直接输入minecraft:后面的值,模组物品要这样转化:pixelmon:rare_candy => pixelmon_rare_candy
+#数量 amount: <字符串>
+prize-earth:
+  type: 'item'
+  rate: 10
+  display: '神奇糖果4个'
+  id: 'pixelmon_rare_candy'
+  amount: 4
+#宝可梦球给予参数
+#奖品种类 type: 'pokeBall'
+#概率值 rate: <数字>
+#展示名 display: <字符串>
+#宝可梦球ID id: <字符串>
+#数量 amount: <字符串>
+prize-pokeBall:
+  type: 'pokeBall'
+  rate: 10
+  display: '公园球一个'
+  id: 'park_ball'
+  amount: 1
+#金币给予参数
+#物品种类 type: 'money'
+#概率值 rate: <数字>
+#展示名 display: <字符串>
+#数量 amount: <字符串>
+prize-money:
+  type: 'money'
+  rate: 10
+  display: '100金币'
+  amount: 100
+#宝可梦给予参数
+#奖品种类 type: 'pokemon'
+#概率值 rate: <数字>
+#展示名 display: <字符串>
+#物种 species: <字符串> 查询宝可梦的英文名并将其全部改成小写填入
+#材质 palette: <字符串> none:普通材质 shiny:闪光 其他材质输入材质名即可，只能填入一个，互不兼容
+#!!!未实装 形态 form: <形态> 输入特殊形态、地区形态等等形态的形态名
+prize-pokemon-eevee:
+  type: 'pokemon'
+  rate: 10
+  display: '闪光伊布'
+  species: 'eevee'
+  palette: 'shiny'
+#宝可币给予参数
+#奖品种类 type: 'pokeMoney'
+#概率值 rate: <数字>
+#展示名 display: <字符串>
+#数量 amount: <字符串>
+prize-pokeMoney:
+  type: 'pokeMoney'
+  rate: 10
+  display: '100宝可币'
+  amount: 100
+#插件物品给予
+#奖品种类 type: 'lkItem'
+#概率值  rete: <数字>
+#展示名 display: <字符串>
+#物品ID id: <字符串>
+#数量 amount: <数字>
+prize-shinyTicket:
+  type: 'lkItem'
+  rate: 10
+  display: '闪光券'
+  id: 'shiny_ticket'
+  amount: 1

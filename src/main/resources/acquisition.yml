@@ -1,0 +1,201 @@
+#id price type
+coal:
+  id: "coal"
+  price: 0.1
+  type: 1
+iron-ore:
+  id: "iron_ore"
+  price: 2
+  type: 1
+gold-ore:
+  id: "gold_ore"
+  price: 3
+  type: 1
+copper-ore:
+  id: "create_copper_ore"
+  price: 1
+  type: 1
+zinc-ore:
+  id: "create_zinc_ore"
+  price: 1
+  type: 1
+bauxite-ore:
+  id: "pixelmon_bauxite_ore"
+  price: 2
+  type: 1
+silver-ore:
+  id: "pixelmon_silver_ore"
+  price: 2
+  type: 1
+platinum-ore:
+  id: "pixelmon_platinum_ore"
+  price: 2
+  type: 1
+emerald:
+  id: "emerald"
+  price: 5
+  type: 1
+diamond:
+  id: "diamond"
+  price: 5
+  type: 4
+redstone:
+  id: "redstone"
+  price: 0.2
+  type: 1
+lapis-lazuli:
+  id: "lapis_lazuli"
+  price: 0.2
+  type: 1
+netherite-scrap:
+  id: "netherite_scrap"
+  price: 5
+  type: 1
+crystal:
+  id: "pixelmon_crystal"
+  price: 1
+  type: 1
+amethyst:
+  id: "pixelmon_amethyst"
+  price: 1
+  type: 1
+ruby:
+  id: "pixelmon_ruby"
+  price: 1
+  type: 1
+sapphire:
+  id: "pixelmon_sapphire"
+  price: 1
+  type: 1
+silicon:
+  id: "pixelmon_silicon"
+  price: 1
+  type: 1
+wheat:
+  id: "wheat"
+  price: 0.2
+  type: 2
+carrot:
+  id: "carrot"
+  price: 0.1
+  type: 2
+potato:
+  id: "potato"
+  price: 0.1
+  type: 2
+sugar-cane:
+  id: "sugar_cane"
+  price: 0.05
+  type: 2
+cactus:
+  id: "cactus"
+  price: 0.05
+  type: 2
+cocoa-beans:
+  id: "cocoa_beans"
+  price: 0.05
+  type: 2
+sweet-berries:
+  id: "sweet_berries"
+  price: 0.05
+  type: 2
+nether-wart:
+  id: "nether_wart"
+  price: 0.1
+  type: 2
+cabbage:
+  id: "farmersdelight_cabbage"
+  price: 0.1
+  type: 2
+tomato:
+  id: "farmersdelight_tomato"
+  price: 0.1
+  type: 2
+onion:
+  id: "farmersdelight_onion"
+  price: 0.1
+  type: 2
+rice-panicle:
+  id: "farmersdelight_rice_panicle"
+  price: 0.2
+  type: 2
+leather:
+  id: "leather"
+  price: 1
+  type: 3
+gunpowder:
+  id: "gunpowder"
+  price: 1
+  type: 3
+blaze-powder:
+  id: "blaze_powder"
+  price: 0.3
+  type: 3
+blaze-rod:
+  id: "blaze_rod"
+  price: 1
+  type: 3
+rabbit-foot:
+  id: "rabbit_foot"
+  price: 1
+  type: 3
+pufferfish:
+  id: "pufferfish"
+  price: 1
+  type: 3
+phantom-membrane:
+  id: "phantom_membrane"
+  price: 1
+  type: 3
+nether-star:
+  id: "nether_star"
+  price: 5
+  type: 3
+shulker-shell:
+  id: "shulker_shell"
+  price: 5
+  type: 3
+rotten-flesh:
+  id: "rotten_flesh"
+  price: 0.5
+  type: 3
+bone:
+  id: "bone"
+  price: 0.5
+  type: 3
+spider-eye:
+  id: "spider_eye"
+  price: 0.5
+  type: 3
+string:
+  id: "string"
+  price: 0.5
+  type: 3
+ender-pearl:
+  id: "ender_pearl"
+  price: 0.5
+  type: 3
+feather:
+  id: "feather"
+  price: 0.5
+  type: 3
+egg:
+  id: "egg"
+  price: 0.5
+  type: 3
+ink-sac:
+  id: "ink_sac"
+  price: 0.5
+  type: 3
+prismarine-shard:
+  id: "prismarine_shard"
+  price: 0.5
+  type: 3
+prismarine-crystals:
+  id: "prismarine_crystals"
+  price: 0.5
+  type: 3
+rabbit_hide:
+  id: "rabbit_hide"
+  price: 0.25
+  type: 3

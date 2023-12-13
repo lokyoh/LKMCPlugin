@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+    id 'maven-publish'
+}
+group 'com.lkmc'
+version '1.16.5-0.3.2'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+
+repositories {
+    mavenCentral()
+    maven { url "https://maven.mohistmc.com/" }
+}
+dependencies {
+    implementation 'com.mohistmc:mohistdev:1.16.5'
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+    implementation files('lib/Pixelmon-1.16.5-9.1.8-universal.jar')
+    implementation files('lib/Vault.jar')
+    implementation files('lib/mcp-reborn-1.0.0.jar')
+    implementation files('lib/EssentialsX-2.21.0-dev+21-c68b277.jar')
+    implementation files('lib/PixelmonEssentials-1.2.9-public.jar')
+}

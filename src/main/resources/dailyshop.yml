@@ -1,0 +1,160 @@
+supplement_card:
+  type: 'lkItem'
+  id: 'supplement_card'
+  amount: 1
+  price: 10
+ticket:
+  type: 'lkItem'
+  id: 'ticket'
+  amount: 1
+  price: 100
+shiny-ticket:
+  type: 'lkItem'
+  id: 'shiny_ticket'
+  amount: 1
+  price: 300
+gender-ticket:
+  type: 'lkItem'
+  id: 'gender_ticket'
+  amount: 1
+  price: 300
+shiny-charm:
+  type: 'item'
+  id: 'pixelmon_shiny_charm'
+  amount: 1
+  price: 666
+catching-charm:
+  type: 'item'
+  id: 'pixelmon_catching_charm'
+  amount: 1
+  price: 666
+exp-charm:
+  type: 'item'
+  id: 'pixelmon_exp_charm'
+  amount: 1
+  price: 666
+oval-charm:
+  type: 'item'
+  id: 'pixelmon_oval_charm'
+  amount: 1
+  price: 666
+mark-charm:
+  type: 'item'
+  id: 'pixelmon_mark_charm'
+  amount: 1
+  price: 666
+xs-exp-candy:
+  type: 'item'
+  id: 'pixelmon_xs_exp_candy'
+  amount: 8
+  price: 1
+s-exp-candy:
+  type: 'item'
+  id: 'pixelmon_s_exp_candy'
+  amount: 1
+  price: 1
+m-exp-candy:
+  type: 'item'
+  id: 'pixelmon_m_exp_candy'
+  amount: 1
+  price: 3
+l-exp-candy:
+  type: 'item'
+  id: 'pixelmon_l_exp_candy'
+  amount: 1
+  price: 10
+xl-exp-candy:
+  type: 'item'
+  id: 'pixelmon_xl_exp_candy'
+  amount: 1
+  price: 30
+rare-candy:
+  type: 'item'
+  id: 'pixelmon_rare_candy'
+  amount: 1
+  price: 30
+perilous-soup:
+  type: 'item'
+  id: 'pixelmon_perilous_soup'
+  amount: 1
+  price: 30
+pp-up:
+  type: 'item'
+  id: 'pixelmon_pp_up'
+  amount: 1
+  price: 10
+pp-max:
+  type: 'item'
+  id: 'pixelmon_pp_max'
+  amount: 1
+  price: 30
+ultra-ball:
+  type: 'pokeBall'
+  id: 'ultra_ball'
+  amount: 1
+  price: 1
+dusk-ball:
+  type: 'pokeBall'
+  id: 'dusk_ball'
+  amount: 1
+  price: 1
+timer-ball:
+  type: 'pokeBall'
+  id: 'timer_ball'
+  amount: 1
+  price: 1
+repeat-ball:
+  type: 'pokeBall'
+  id: 'repeat_ball'
+  amount: 1
+  price: 1
+beast-ball:
+  type: 'pokeBall'
+  id: 'beast_ball'
+  amount: 1
+  price: 5
+copper-hourglass:
+  type: 'item'
+  id: 'pixelmon_copper_hourglass'
+  amount: 1
+  price: 30
+silver-hourglass:
+  type: 'item'
+  id: 'pixelmon_silver_hourglass'
+  amount: 1
+  price: 40
+gold-hourglass:
+  type: 'item'
+  id: 'pixelmon_gold_hourglass'
+  amount: 1
+  price: 100
+diamond-hourglass:
+  type: 'item'
+  id: 'pixelmon_diamond_hourglass'
+  amount: 1
+  price: 400
+#商品有type、price两个共同属性，除宝可梦都有amount属性，下面是不同点
+
+#物品给予参数
+#奖品种类 type: 'item'
+#物品ID id: <字符串> 原版物品直接输入minecraft:后面的值,模组物品要这样转化:pixelmon:rare_candy => pixelmon_rare_candy
+
+#宝可梦球给予参数
+#奖品种类 type: 'pokeBall'
+#宝可梦球ID id: <字符串>
+
+#金币给予参数
+#物品种类 type: 'money'
+
+#宝可梦给予参数
+#奖品种类 type: 'pokemon'
+#物种 species: <字符串> 查询宝可梦的英文名并将其全部改成小写填入
+#材质 palette: <字符串> none:普通材质 shiny:闪光 其他材质输入材质名即可，只能填入一个，互不兼容
+#!!!未实装 形态 form: <形态> 输入特殊形态、地区形态等等形态的形态名
+
+#宝可币给予参数
+#奖品种类 type: 'pokeMoney'
+
+#插件物品给予
+#奖品种类 type: 'lkItem'
+#物品ID id: <字符串>
