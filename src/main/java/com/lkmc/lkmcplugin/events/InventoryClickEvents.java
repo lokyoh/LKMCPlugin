@@ -15,6 +15,8 @@ import com.lkmc.lkmcplugin.module.draw.DrawBase;
 import com.lkmc.lkmcplugin.module.systemShop.SystemShopBase;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.species.gender.Gender;
+import com.pixelmonmod.pixelmon.api.storage.PlayerPartyStorage;
+import com.pixelmonmod.pixelmon.enums.EnumGrowth;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -115,7 +117,9 @@ public class InventoryClickEvents implements Listener {
                     DailySignInUI.showShop(p, 1);
                 else if (e.getRawSlot() == 53)
                     e.getWhoClicked().closeInventory();
-            } else if (e.getView().getTitle().matches("§6每日积分商店 第(\\d*)页")) {
+                return;
+            }
+            if (e.getView().getTitle().matches("§6每日积分商店 第(\\d*)页")) {
                 e.setCancelled(true);
                 Player p = (Player) e.getWhoClicked();
                 Pattern r = Pattern.compile("§6每日积分商店 第(\\d*)页");
@@ -131,16 +135,19 @@ public class InventoryClickEvents implements Listener {
                         if (page < 2)
                             return;
                         DailySignInUI.showShop(p, page - 1);
+                        return;
                     }
                     if (e.getRawSlot() == 49) {
                         if (page == 1)
                             return;
                         DailySignInUI.showShop(p, 1);
+                        return;
                     }
                     if (e.getRawSlot() == 50) {
                         if (DailySignInBase.goods.size() - (page - 1) * 36 < 36)
                             return;
                         DailySignInUI.showShop(p, page + 1);
+                        return;
                     }
                 }
                 if (e.getRawSlot() == 53)
@@ -196,20 +203,24 @@ public class InventoryClickEvents implements Listener {
                         if (page < 2)
                             return;
                         LKShopUI.showSell(p, page - 1);
+                        return;
                     }
                     if (e.getRawSlot() == 49) {
                         if (page == 1)
                             return;
                         LKShopUI.showSell(p, 1);
+                        return;
                     }
                     if (e.getRawSlot() == 50) {
                         if (SystemShopBase.goods.size() - (page - 1) * 36 < 36)
                             return;
                         LKShopUI.showSell(p, page + 1);
+                        return;
                     }
                 }
                 if (e.getRawSlot() == 53)
                     e.getWhoClicked().closeInventory();
+                return;
             }
             if (e.getView().getTitle().equalsIgnoreCase("§6选择卖出的数量")) {
                 e.setCancelled(true);
@@ -247,6 +258,56 @@ public class InventoryClickEvents implements Listener {
                     DailySignInUI.showShop(p, 1);
                 else if (e.getRawSlot() == 53)
                     e.getWhoClicked().closeInventory();
+                return;
+            }
+            if (Objects.equals(e.getView().getTitle(), "§6体型修改界面")) {
+                e.setCancelled(true);
+                PlayerPartyStorage playerPartyStorage = MyPokemon.getPlayerPartyStorage((Player) e.getWhoClicked());
+                int index = e.getRawSlot() / 9;
+                Pokemon pokemon = playerPartyStorage.get(index);
+                if(pokemon==null)
+                    return;
+                int growth = e.getRawSlot() % 9;
+                if ((pokemon.getGrowth().index == 8 ? 0 : pokemon.getGrowth().index + 1) == growth) {
+                    e.getWhoClicked().closeInventory();
+                    return;
+                }
+                if(MyInventory.useThisThing((Player) e.getWhoClicked(),MyItem.getMeta("growth_ticket"))){
+                    switch (growth){
+                        case 0:
+                            pokemon.setGrowth(EnumGrowth.Microscopic);
+                            break;
+                        case 1:
+                            pokemon.setGrowth(EnumGrowth.Pygmy);
+                            break;
+                        case 2:
+                            pokemon.setGrowth(EnumGrowth.Runt);
+                            break;
+                        case 3:
+                            pokemon.setGrowth(EnumGrowth.Small);
+                            break;
+                        case 4:
+                            pokemon.setGrowth(EnumGrowth.Ordinary);
+                            break;
+                        case 5:
+                            pokemon.setGrowth(EnumGrowth.Huge);
+                            break;
+                        case 6:
+                            pokemon.setGrowth(EnumGrowth.Giant);
+                            break;
+                        case 7:
+                            pokemon.setGrowth(EnumGrowth.Enormous);
+                            break;
+                        case 8:
+                            pokemon.setGrowth(EnumGrowth.Ginormous);
+                            break;
+                    }
+                    e.getWhoClicked().sendMessage("修改成功");
+                }else {
+                    e.getWhoClicked().sendMessage("你没有体型券");
+                }
+                e.getWhoClicked().closeInventory();
+                return;
             }
         } catch (Exception ignore) {
         }

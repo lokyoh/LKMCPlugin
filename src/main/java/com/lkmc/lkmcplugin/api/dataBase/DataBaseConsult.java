@@ -21,7 +21,7 @@ public class DataBaseConsult {
         public int times;
 
         PLegendary(DailyQuestPlayerData data) {
-            name = Bukkit.getPlayer(data.uuid).getDisplayName();
+            name = Bukkit.getPlayer(data.uuid).getDisplayName().replaceAll("§.", "");
             times = data.getLegendary();
         }
     }
@@ -35,30 +35,30 @@ public class DataBaseConsult {
         }
         list.sort((o1, o2) -> o2.times - o1.times);
         if (page > ((list.size() - 1) / 10 + 1)) {
-            sender.sendMessage("页面数量超过最大值");
+            sender.sendMessage("§4页面数量超过最大值");
             return;
         }
-        sender.sendMessage("神兽刷新选中排行第" + page + "/" + ((list.size() - 1) / 10 + 1) + "页:");
+        sender.sendMessage("§3神兽刷新选中排行第" + page + "/" + ((list.size() - 1) / 10 + 1) + "页:");
         for (int i = 0; i < Math.min(list.size() - (page - 1) * 10, 10); i++) {
             PLegendary data = list.get(i + (page - 1) * 10);
-            sender.sendMessage((i + (page - 1) * 10 + 1) + ":" + data.name + " " + data.times);
+            sender.sendMessage("§7" + (i + (page - 1) * 10 + 1) + ":" + data.name + " " + data.times);
         }
     }
 
     public static void consultPlayerLegendary(CommandSender sender, Player p) {
-        sender.sendMessage(p.getDisplayName() + " 已经被神兽刷新选中 " + DailyQuestBase.data.get(p.getUniqueId()).getLegendary() + " 次了");
+        sender.sendMessage("§3" + p.getDisplayName().replaceAll("§.", "") + " 已经被神兽刷新选中 " + DailyQuestBase.data.get(p.getUniqueId()).getLegendary() + " 次了");
     }
 
     public static void consultDrawLog(Player p, int page) {
         executorService.submit(() -> {
             List<String> logs = DrawBase.getLog(p);
             if (page > ((logs.size() - 1) / 10 + 1)) {
-                p.sendMessage("页面数量超过最大值");
+                p.sendMessage("§4页面数量超过最大值");
                 return;
             }
-            p.sendMessage(p.getDisplayName() + " 的抽奖记录第" + page + "/" + ((logs.size() - 1) / 10 + 1) + "页:");
+            p.sendMessage("§3" + p.getDisplayName().replaceAll("§.", "") + " 的抽奖记录第" + page + "/" + ((logs.size() - 1) / 10 + 1) + "页:");
             for (int i = 0; i < Math.min(logs.size() - (page - 1) * 10, 10); i++) {
-                p.sendMessage(logs.get(i + (page - 1) * 10));
+                p.sendMessage("§7" + logs.get(i + (page - 1) * 10));
             }
         });
     }

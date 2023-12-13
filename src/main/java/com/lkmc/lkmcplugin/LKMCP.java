@@ -7,12 +7,12 @@ import com.lkmc.lkmcplugin.item.MyItem;
 import com.lkmc.lkmcplugin.item.UIItem;
 import com.lkmc.lkmcplugin.module.dailyQuest.DailyQuestBase;
 import com.lkmc.lkmcplugin.module.dailySignIn.DailySignInBase;
-import com.lkmc.lkmcplugin.module.dailySignIn.DailyTask;
 import com.lkmc.lkmcplugin.module.draw.DrawBase;
 import com.lkmc.lkmcplugin.module.systemShop.SystemShopBase;
+import jline.internal.ShutdownHooks;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.sql.Connection;
@@ -20,19 +20,19 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public final class LKMCP extends JavaPlugin {
     public static LKMCP plugin;
     public static boolean drawEnable = true;
-    public static boolean dailySignInEnable = true;
+    public static boolean dailySystemEnable = true;
     public static boolean dailyShopEnable = true;
     public static File prizeFile;
     public static File dailyShopFile;
     public static File acquisition;
     public static Connection connection;
-    private static final long PERIOD_DAY = 24 * 60 * 60 * 1000;
+    private static final long PERIOD_DAY = 24 * 60 * 60 * 20;
     public static Timer timer = new Timer();
-    public static DailyTask dailyTask = new DailyTask();
     public static int mines;
     public static int crops;
     public static int drops;
@@ -79,7 +79,12 @@ public final class LKMCP extends JavaPlugin {
             startDT.add(Calendar.DAY_OF_MONTH, 1);
             date = startDT.getTime();
         }
-        timer.schedule(dailyTask, date, PERIOD_DAY);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new DailyTask().runTask(plugin);
+            }
+        }, date, PERIOD_DAY);
         // 每日签到注册与初始化
         mines = getConfig().getInt("daily-acquisition-settings.mines", -1);
         crops = getConfig().getInt("daily-acquisition-settings.crops", -1);
@@ -101,7 +106,7 @@ public final class LKMCP extends JavaPlugin {
             }
             SystemShopBase.init();
         } catch (SQLException e) {
-            dailySignInEnable = false;
+            dailySystemEnable = false;
             printLog("SQL开启失败，已关闭每日系统");
             e.printStackTrace();
         }
@@ -113,7 +118,6 @@ public final class LKMCP extends JavaPlugin {
         try {
             connection.close();
             timer.cancel();
-            dailyTask.cancel();
         } catch (Exception ignored) {
         }
         printLog("LKMC插件已卸载");

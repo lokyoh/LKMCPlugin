@@ -28,7 +28,7 @@ public class SystemShopBase {
         try {
             SQLite.createTable(LKMCP.connection, "sell", "uuid CHAR(36) PRIMARY KEY, mines DOUBLE, crops DOUBLE, drops DOUBLE, diamonds INT");
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在更新表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class SystemShopBase {
             result.close();
             statement.close();
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在读取表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }

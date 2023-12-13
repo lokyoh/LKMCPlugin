@@ -1,6 +1,7 @@
 package com.lkmc.lkmcplugin.item;
 
 import com.lkmc.lkmcplugin.LKMCP;
+import com.lkmc.lkmcplugin.api.ItemBuilder;
 import com.lkmc.lkmcplugin.api.MyPokemon;
 import com.lkmc.lkmcplugin.module.dailyQuest.DailyQuestBase;
 import com.lkmc.lkmcplugin.module.dailyQuest.DailyQuestPlayerData;
@@ -22,218 +23,183 @@ public class UIItem {
 
     public static void init() {
         // error
-        ItemStack error = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta errorItemMeta = error.getItemMeta();
-        errorItemMeta.setDisplayName("§c未找到此UI物品");
-        error.setItemMeta(errorItemMeta);
-        UIItems.put("error", error);
-        // blank
-        ItemStack blank = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta blankItemMeta = blank.getItemMeta();
-        blankItemMeta.setDisplayName("空白板");
-        blank.setItemMeta(blankItemMeta);
-        UIItems.put("blank", blank);
-        // exit
-        ItemStack exit = new ItemStack(Material.COMPASS);
-        ItemMeta exitItemMeta = exit.getItemMeta();
-        exitItemMeta.setDisplayName("退出");
-        exitItemMeta.setLore(Collections.singletonList("点击退出"));
-        exit.setItemMeta(exitItemMeta);
-        UIItems.put("exit", exit);
-        // draw_once
-        ItemStack drawOnce = new ItemStack(Material.END_CRYSTAL);
-        ItemMeta drawOnceItemMeta = drawOnce.getItemMeta();
-        drawOnceItemMeta.setDisplayName("点击抽奖");
-        drawOnce.setItemMeta(drawOnceItemMeta);
-        UIItems.put("draw_once", drawOnce);
-        // draw_ten_times
-        ItemStack drawTenTimes = new ItemStack(Material.END_CRYSTAL);
-        ItemMeta drawTenTimesItemMeta = drawTenTimes.getItemMeta();
-        drawTenTimesItemMeta.setDisplayName("点击十连抽奖");
-        drawTenTimes.setItemMeta(drawTenTimesItemMeta);
-        UIItems.put("draw_ten_times", drawTenTimes);
-        // draw_error1
-        ItemStack drawError1 = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta drawError1ItemMeta = drawError1.getItemMeta();
-        drawError1ItemMeta.setDisplayName("§c未找到抽奖券或背包空间不足");
-        drawError1.setItemMeta(drawError1ItemMeta);
-        UIItems.put("draw_error1", drawError1);
-        // draw_error2
-        ItemStack drawError2 = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta drawError2ItemMeta = drawError2.getItemMeta();
-        drawError2ItemMeta.setDisplayName("§c抽奖出现错误");
-        drawError2.setItemMeta(drawError2ItemMeta);
-        UIItems.put("draw_error2", drawError2);
-        // pokemon_none_icon
-        ItemStack pokemonNoneIcon = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta pokemonNoneIconItemMeta = pokemonNoneIcon.getItemMeta();
-        pokemonNoneIconItemMeta.setDisplayName("§c未找到宝可梦");
-        pokemonNoneIcon.setItemMeta(pokemonNoneIconItemMeta);
-        UIItems.put("pokemon_none_icon", pokemonNoneIcon);
-        // daily_sign_in_today_not_attend
-        ItemStack dailySignInTodayNotAttend = new ItemStack(Material.RED_WOOL);
-        ItemMeta dailySignInTodayNotAttendItemMeta = dailySignInTodayNotAttend.getItemMeta();
-        dailySignInTodayNotAttendItemMeta.setLore(Arrays.asList("§4未签到", "§5§n点击签到"));
-        dailySignInTodayNotAttendItemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 10, true);
-        dailySignInTodayNotAttend.setItemMeta(dailySignInTodayNotAttendItemMeta);
-        UIItems.put("daily_sign_in_today_not_attend", dailySignInTodayNotAttend);
-        // daily_sign_in_today_attend
-        ItemStack dailySignInTodayAttend = new ItemStack(Material.LIME_WOOL);
-        ItemMeta dailySignInTodayAttendItemMeta = dailySignInTodayAttend.getItemMeta();
-        dailySignInTodayAttendItemMeta.setLore(Collections.singletonList("§a已签到"));
-        dailySignInTodayAttendItemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 10, true);
-        dailySignInTodayAttend.setItemMeta(dailySignInTodayAttendItemMeta);
-        UIItems.put("daily_sign_in_today_attend", dailySignInTodayAttend);
-        // daily_sign_in_past_not_attend
-        ItemStack dailySignInPastNotAttend = new ItemStack(Material.RED_WOOL);
-        ItemMeta dailySignInPastNotAttendItemMeta = dailySignInPastNotAttend.getItemMeta();
-        dailySignInPastNotAttendItemMeta.setLore(Arrays.asList("§4未签到", "§5§n点击补签"));
-        dailySignInPastNotAttend.setItemMeta(dailySignInPastNotAttendItemMeta);
-        UIItems.put("daily_sign_in_past_not_attend", dailySignInPastNotAttend);
-        // daily_sign_in_past_attend
-        ItemStack dailySignInPastAttend = new ItemStack(Material.LIME_WOOL);
-        ItemMeta dailySignInPastAttendItemMeta = dailySignInPastAttend.getItemMeta();
-        dailySignInPastAttendItemMeta.setLore(Collections.singletonList("§a已签到"));
-        dailySignInPastAttend.setItemMeta(dailySignInPastAttendItemMeta);
-        UIItems.put("daily_sign_in_past_attend", dailySignInPastAttend);
-        // daily_sign_in_future
-        ItemStack dailySignInFuture = new ItemStack(Material.GRAY_WOOL);
-        ItemMeta dailySignInFutureItemMeta = dailySignInFuture.getItemMeta();
-        dailySignInFutureItemMeta.setLore(Collections.singletonList("§7§o时间未到"));
-        dailySignInFuture.setItemMeta(dailySignInFutureItemMeta);
-        UIItems.put("daily_sign_in_future", dailySignInFuture);
-        // daily_sign_in_prize
-        ItemStack dailySignInPrize = new ItemStack(Material.BOOKSHELF);
-        ItemMeta dailySignInPrizeItemMeta = dailySignInPrize.getItemMeta();
-        dailySignInPrizeItemMeta.setDisplayName("累计签到奖励");
-        dailySignInPrizeItemMeta.setLore(Arrays.asList(
-                "3天:钻石*3 5天:高级球*20 7天:黑暗球*20 10天:金币*100"
-                , "13天:钻石*3 15天:计时球*20 17天:金币*100 20天:抽奖券*1"
-                , "23天:钻石*3 25天:大师球*1 27天:重复球*20 30天:金币*100"
-                , "满签:抽奖券*1"
+        UIItems.put("error", ItemBuilder.buildItem(
+                Material.RED_STAINED_GLASS_PANE,
+                "§c未找到此UI物品"
         ));
-        dailySignInPrize.setItemMeta(dailySignInPrizeItemMeta);
-        UIItems.put("daily_sign_in_prize", dailySignInPrize);
+        // blank
+        UIItems.put("blank", ItemBuilder.buildItem(
+                Material.GRAY_STAINED_GLASS_PANE,
+                "§7空白板"
+        ));
+        // exit
+        UIItems.put("exit", ItemBuilder.buildItem(
+                Material.COMPASS,
+                "退出",
+                Collections.singletonList("§5§n点击退出")
+        ));
+        // draw_once
+        UIItems.put("draw_once", ItemBuilder.buildItem(
+                Material.END_CRYSTAL,
+                "§6点击抽奖"
+        ));
+        // draw_ten_times
+        UIItems.put("draw_ten_times", ItemBuilder.buildItem(
+                Material.END_CRYSTAL,
+                "§6点击十连抽奖"
+        ));
+        // draw_error1
+        UIItems.put("draw_error1", ItemBuilder.buildItem(
+                Material.RED_STAINED_GLASS_PANE,
+                "§c未找到抽奖券或背包空间不足"
+        ));
+        // draw_error2
+        UIItems.put("draw_error2", ItemBuilder.buildItem(
+                Material.RED_STAINED_GLASS_PANE,
+                "§c抽奖出现错误"
+        ));
+        // pokemon_none_icon
+        UIItems.put("pokemon_none_icon", ItemBuilder.buildItem(
+                Material.RED_STAINED_GLASS_PANE,
+                "§c未找到宝可梦"
+        ));
+        // daily_sign_in_today_not_attend
+        UIItems.put("daily_sign_in_today_not_attend", ItemBuilder.buildItem(
+                Material.RED_WOOL,
+                Arrays.asList("§4未签到", "§5§n点击签到"),
+                Collections.singletonList(Enchantment.LOOT_BONUS_BLOCKS)
+        ));
+        // daily_sign_in_today_attend
+        UIItems.put("daily_sign_in_today_attend", ItemBuilder.buildItem(
+                Material.LIME_WOOL,
+                Collections.singletonList("§a已签到"),
+                Collections.singletonList(Enchantment.LOOT_BONUS_BLOCKS)
+        ));
+        // daily_sign_in_past_not_attend
+        UIItems.put("daily_sign_in_past_not_attend", ItemBuilder.buildItem(
+                Material.RED_WOOL,
+                Arrays.asList("§4未签到", "§5§n点击补签")
+        ));
+        // daily_sign_in_past_attend
+        UIItems.put("daily_sign_in_past_attend", ItemBuilder.buildItem(
+                Material.LIME_WOOL,
+                Collections.singletonList("§a已签到")
+        ));
+        // daily_sign_in_future
+        UIItems.put("daily_sign_in_future", ItemBuilder.buildItem(
+                Material.GRAY_WOOL,
+                Collections.singletonList("§7§o时间未到")
+        ));
+        // daily_sign_in_prize
+        UIItems.put("daily_sign_in_prize", ItemBuilder.buildItem(
+                Material.BOOKSHELF,
+                "累计签到奖励",
+                Arrays.asList(
+                        "3天:钻石*3 5天:高级球*20 7天:黑暗球*20 10天:金币*100"
+                        , "13天:钻石*3 15天:计时球*20 17天:金币*100 20天:抽奖券*1"
+                        , "23天:钻石*3 25天:大师球*1 27天:重复球*20 30天:金币*100"
+                        , "满签:抽奖券*1"
+                )
+        ));
         // daily_sign_in_point
-        ItemStack dailySignInPoint = new ItemStack(Material.GOLD_BLOCK);
-        ItemMeta dailySignInPointItemMeta = dailySignInPoint.getItemMeta();
-        dailySignInPointItemMeta.setDisplayName("每日积分");
-        dailySignInPoint.setItemMeta(dailySignInPointItemMeta);
-        UIItems.put("daily_sign_in_point", dailySignInPoint);
+        UIItems.put("daily_sign_in_point", ItemBuilder.buildItem(
+                Material.GOLD_BLOCK,
+                "§6每日积分"
+        ));
         // daily_shop
-        ItemStack dailyShop = new ItemStack(Material.BEACON);
-        ItemMeta dailyShopItemMeta = dailyShop.getItemMeta();
-        dailyShopItemMeta.setDisplayName("每日积分商店");
-        dailyShopItemMeta.setLore(Collections.singletonList("点击进入每日积分商店"));
-        dailyShop.setItemMeta(dailyShopItemMeta);
-        UIItems.put("daily_shop", dailyShop);
+        UIItems.put("daily_shop", ItemBuilder.buildItem(
+                Material.BEACON,
+                "§6每日积分商店",
+                Collections.singletonList("§5§n点击进入每日积分商店")
+        ));
         // next_page
-        ItemStack nextPage = new ItemStack(Material.PAPER);
-        ItemMeta nextPageItemMeta = nextPage.getItemMeta();
-        nextPageItemMeta.setDisplayName("下一页");
-        nextPageItemMeta.setLore(Collections.singletonList("点击进入下一页"));
-        nextPage.setItemMeta(nextPageItemMeta);
-        UIItems.put("next_page", nextPage);
+        UIItems.put("next_page", ItemBuilder.buildItem(
+                Material.PAPER,
+                "下一页",
+                Collections.singletonList("§5§n点击进入下一页")
+        ));
         // previous_page
-        ItemStack previousPage = new ItemStack(Material.PAPER);
-        ItemMeta previousPageItemMeta = previousPage.getItemMeta();
-        previousPageItemMeta.setDisplayName("上一页");
-        previousPageItemMeta.setLore(Collections.singletonList("点击进入上一页"));
-        previousPage.setItemMeta(previousPageItemMeta);
-        UIItems.put("previous_page", previousPage);
+        UIItems.put("previous_page", ItemBuilder.buildItem(
+                Material.PAPER,
+                "上一页",
+                Collections.singletonList("§5§n点击进入上一页")
+        ));
         // fist_page
-        ItemStack fistPage = new ItemStack(Material.BEACON);
-        ItemMeta fistPageItemMeta = fistPage.getItemMeta();
-        fistPageItemMeta.setDisplayName("第一页");
-        fistPageItemMeta.setLore(Collections.singletonList("点击进入第一页"));
-        fistPage.setItemMeta(fistPageItemMeta);
-        UIItems.put("fist_page", fistPage);
+        UIItems.put("fist_page", ItemBuilder.buildItem(
+                Material.BEACON,
+                "第一页",
+                Collections.singletonList("§5§n点击进入第一页")
+        ));
         // can_sell_info
-        ItemStack canSellInfo = new ItemStack(Material.GOLD_BLOCK);
-        ItemMeta canSellInfoItemMeta = canSellInfo.getItemMeta();
-        canSellInfoItemMeta.setDisplayName("收购值:");
-        canSellInfo.setItemMeta(canSellInfoItemMeta);
-        UIItems.put("can_sell_info", canSellInfo);
+        UIItems.put("can_sell_info", ItemBuilder.buildItem(
+                Material.GOLD_BLOCK,
+                "收购值:"
+        ));
         // sell1
-        ItemStack sell1 = new ItemStack(Material.PAPER);
-        ItemMeta sell1ItemMeta = sell1.getItemMeta();
-        sell1ItemMeta.setDisplayName("卖1个");
-        sell1.setItemMeta(sell1ItemMeta);
-        UIItems.put("sell1", sell1);
+        UIItems.put("sell1", ItemBuilder.buildItem(
+                Material.PAPER,
+                "卖1个"
+        ));
         // sell8
-        ItemStack sell8 = new ItemStack(Material.PAPER);
-        ItemMeta sell8ItemMeta = sell8.getItemMeta();
-        sell8ItemMeta.setDisplayName("卖8个");
-        sell8.setItemMeta(sell8ItemMeta);
-        sell8.setAmount(8);
-        UIItems.put("sell8", sell8);
+        UIItems.put("sell8", ItemBuilder.buildItem(
+                Material.PAPER,
+                "卖8个",
+                8
+        ));
         // sell16
-        ItemStack sell16 = new ItemStack(Material.PAPER);
-        ItemMeta sell16ItemMeta = sell16.getItemMeta();
-        sell16ItemMeta.setDisplayName("卖16个");
-        sell16.setItemMeta(sell16ItemMeta);
-        sell16.setAmount(16);
-        UIItems.put("sell16", sell16);
+        UIItems.put("sell16", ItemBuilder.buildItem(
+                Material.PAPER,
+                "卖16个",
+                16
+        ));
         // sell32
-        ItemStack sell32 = new ItemStack(Material.PAPER);
-        ItemMeta sell32ItemMeta = sell32.getItemMeta();
-        sell32ItemMeta.setDisplayName("卖32个");
-        sell32.setItemMeta(sell32ItemMeta);
-        sell32.setAmount(32);
-        UIItems.put("sell32", sell32);
+        UIItems.put("sell32", ItemBuilder.buildItem(
+                Material.PAPER,
+                "卖32个",
+                32
+        ));
         // sell64
-        ItemStack sell64 = new ItemStack(Material.PAPER);
-        ItemMeta sell64ItemMeta = sell64.getItemMeta();
-        sell64ItemMeta.setDisplayName("卖64个");
-        sell64.setItemMeta(sell64ItemMeta);
-        sell64.setAmount(64);
-        UIItems.put("sell64", sell64);
+        UIItems.put("sell64", ItemBuilder.buildItem(
+                Material.PAPER,
+                "卖64个",
+                64
+        ));
         // goods_tag
-        ItemStack goodsTag = new ItemStack(Material.NAME_TAG);
-        UIItems.put("goods_tag", goodsTag);
+        UIItems.put("goods_tag", ItemBuilder.buildItem(Material.NAME_TAG));
         // shop_tips
-        ItemStack shopTips = new ItemStack(Material.BOOK);
-        ItemMeta shopTipsItemMeta = shopTips.getItemMeta();
-        shopTipsItemMeta.setDisplayName("左键进入数量选择界面,右键全部售出");
-        shopTips.setItemMeta(shopTipsItemMeta);
-        UIItems.put("shop_tips", shopTips);
+        UIItems.put("shop_tips", ItemBuilder.buildItem(
+                Material.BOOK,
+                "左键进入数量选择界面,右键全部售出"
+        ));
         // quest_complete
-        ItemStack questComplete = new ItemStack(Material.LIME_WOOL);
-        ItemMeta questCompleteItemMeta = questComplete.getItemMeta();
-        questCompleteItemMeta.setDisplayName("已领取");
-        questComplete.setItemMeta(questCompleteItemMeta);
-        UIItems.put("quest_complete", questComplete);
+        UIItems.put("quest_complete", ItemBuilder.buildItem(
+                Material.LIME_WOOL,
+                "§a已领取"
+        ));
         // quest_uncompleted
-        ItemStack questUncompleted = new ItemStack(Material.RED_WOOL);
-        ItemMeta questUncompletedItemMeta = questUncompleted.getItemMeta();
-        questUncompletedItemMeta.setDisplayName("未完成");
-        questUncompleted.setItemMeta(questUncompletedItemMeta);
-        UIItems.put("quest_uncompleted", questUncompleted);
+        UIItems.put("quest_uncompleted", ItemBuilder.buildItem(
+                Material.RED_WOOL,
+                "§c未完成"
+        ));
         // quest_unTake
-        ItemStack questUnTake = new ItemStack(Material.YELLOW_WOOL);
-        ItemMeta questUnTakeItemMeta = questUnTake.getItemMeta();
-        questUnTakeItemMeta.setDisplayName("已完成");
-        questUnTakeItemMeta.setLore(Collections.singletonList("点击领取"));
-        questUnTake.setItemMeta(questUnTakeItemMeta);
-        UIItems.put("quest_unTake", questUnTake);
+        UIItems.put("quest_unTake", ItemBuilder.buildItem(
+                Material.YELLOW_WOOL,
+                "§e已完成",
+                Collections.singletonList("§5§n点击领取")
+        ));
         // battle_info
-        ItemStack battleInfo = new ItemStack(Material.getMaterial("PIXELMON_XS_EXP_CANDY"));
-        UIItems.put("battle_info", battleInfo);
+        UIItems.put("battle_info", ItemBuilder.buildItem("PIXELMON_XS_EXP_CANDY"));
         // pvp_info
-        ItemStack pvpInfo = new ItemStack(Material.getMaterial("PIXELMON_PUNCHING_GLOVE"));
-        UIItems.put("pvp_info", pvpInfo);
+        UIItems.put("pvp_info", ItemBuilder.buildItem("PIXELMON_PUNCHING_GLOVE"));
         // quest_info
-        ItemStack questInfo = new ItemStack(Material.getMaterial("PIXELMON_QUEST_EDITOR"));
-        UIItems.put("quest_info", questInfo);
+        UIItems.put("quest_info", ItemBuilder.buildItem("PIXELMON_QUEST_EDITOR"));
         // catch_info
         ItemStack catchInfo = new ItemStack(MyPokemon.getPokeBall("master_ball"));
         UIItems.put("catch_info", catchInfo);
         // login_info
-        ItemStack loginInfo = new ItemStack(Material.EXPERIENCE_BOTTLE);
-        UIItems.put("login_info", loginInfo);
+        UIItems.put("login_info", ItemBuilder.buildItem(Material.CLOCK));
         // fishing_info
-        ItemStack fishingInfo = new ItemStack(Material.getMaterial("PIXELMON_OLD_ROD"));
-        UIItems.put("fishing_info", fishingInfo);
+        UIItems.put("fishing_info", ItemBuilder.buildItem("PIXELMON_OLD_ROD"));
     }
 
     public static ItemStack get(String name) {

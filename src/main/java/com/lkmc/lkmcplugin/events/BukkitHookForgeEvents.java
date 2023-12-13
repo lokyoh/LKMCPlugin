@@ -1,6 +1,9 @@
 package com.lkmc.lkmcplugin.events;
 
 import com.lkmc.lkmcplugin.api.MyPokemon;
+import com.lkmc.lkmcplugin.api.event.MyBattleEndEvent;
+import com.lkmc.lkmcplugin.api.event.MyCaptureEvent;
+import com.lkmc.lkmcplugin.api.event.MyFishingEvent;
 import com.lkmc.lkmcplugin.module.dailyQuest.DailyQuestBase;
 import com.mohistmc.api.event.BukkitHookForgeEvent;
 import com.pixelmonmod.pixelmon.api.battles.BattleEndCause;
@@ -47,6 +50,8 @@ public class BukkitHookForgeEvents implements Listener {
                         if (player != null) {
                             if (!p.isDefeated) {
                                 DailyQuestBase.data.get(player.getUniqueId()).addBattle();
+                                MyBattleEndEvent myBattleEndEvent = new MyBattleEndEvent(player.getUniqueId());
+                                Bukkit.getServer().getPluginManager().callEvent(myBattleEndEvent);
                             }
                         }
                     }
@@ -68,6 +73,8 @@ public class BukkitHookForgeEvents implements Listener {
             Player p = Bukkit.getPlayer(e.player.displayName.replaceAll("§.", ""));
             if (p != null) {
                 DailyQuestBase.data.get(p.getUniqueId()).addFishing();
+                MyFishingEvent myFishingEvent = new MyFishingEvent(p.getUniqueId());
+                Bukkit.getPluginManager().callEvent(myFishingEvent);
             }
             return;
         }
@@ -84,6 +91,8 @@ public class BukkitHookForgeEvents implements Listener {
             Player p = Bukkit.getPlayer(e.getPlayer().displayName.replaceAll("§.", ""));
             if (p != null) {
                 DailyQuestBase.data.get(p.getUniqueId()).addCatch();
+                MyCaptureEvent myCaptureEvent= new MyCaptureEvent(p.getUniqueId());
+                Bukkit.getPluginManager().callEvent(myCaptureEvent);
             }
             return;
         }

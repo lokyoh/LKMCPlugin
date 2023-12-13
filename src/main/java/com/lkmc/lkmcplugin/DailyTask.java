@@ -1,18 +1,20 @@
-package com.lkmc.lkmcplugin.module.dailySignIn;
+package com.lkmc.lkmcplugin;
 
-import com.lkmc.lkmcplugin.LKMCP;
+import com.lkmc.lkmcplugin.api.event.DailyRefreshEvent;
 import com.lkmc.lkmcplugin.module.dailyQuest.DailyQuestBase;
+import com.lkmc.lkmcplugin.module.dailySignIn.DailySignInBase;
 import com.lkmc.lkmcplugin.module.systemShop.SystemShopBase;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimerTask;
 
-public class DailyTask extends TimerTask {
+public class DailyTask extends BukkitRunnable {
     @Override
     public void run() {
-        if (LKMCP.dailySignInEnable) {
-            LKMCP.printLog("更新每日签到数据中...");
+        LKMCP.printLog("更新每日数据中...");
+        if (LKMCP.dailySystemEnable) {
             DailySignInBase.setDay(new SimpleDateFormat("dd").format(new Date()));
             if (DailySignInBase.setMonth(new SimpleDateFormat("yyyyMM").format(new Date()))) {
                 DailySignInBase.create();
@@ -22,7 +24,8 @@ public class DailyTask extends TimerTask {
             }
             SystemShopBase.remake();
             DailyQuestBase.upDate();
-            LKMCP.printLog("每日签到数据更新完成");
         }
+        Bukkit.getServer().getPluginManager().callEvent(new DailyRefreshEvent());
+        LKMCP.printLog("每日数据更新完成");
     }
 }

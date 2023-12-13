@@ -1,5 +1,5 @@
 name: LKMCPlugin
-version: '0.3.2'
+version: '0.3.3'
 main: com.lkmc.lkmcplugin.LKMCP
 api-version: '1.16'
 authors: [l_o_o_k]

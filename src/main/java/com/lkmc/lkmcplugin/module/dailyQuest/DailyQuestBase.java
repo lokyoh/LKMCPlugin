@@ -2,7 +2,11 @@ package com.lkmc.lkmcplugin.module.dailyQuest;
 
 import com.lkmc.lkmcplugin.LKMCP;
 import com.lkmc.lkmcplugin.api.dataBase.SQLite;
+import com.lkmc.lkmcplugin.api.event.TimerEvent;
 import com.lkmc.lkmcplugin.module.dailySignIn.DailySignInBase;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +18,7 @@ import java.util.UUID;
 
 public class DailyQuestBase {
     public static Map<UUID, DailyQuestPlayerData> data = new HashMap<>();
-    public static Map<UUID, Timer> timer = new HashMap<>();
+    public static Map<UUID, BukkitTask> timer = new HashMap<>();
 
     public static void init() {
         create();
@@ -91,8 +95,6 @@ public class DailyQuestBase {
     }
 
     public static void start(UUID uuid) {
-        Timer t = new Timer();
-        t.schedule(new TimeConTask(uuid), 60 * 1000, 60 * 1000);
-        timer.put(uuid, t);
+        timer.put(uuid, new TimeConTask(uuid).runTaskTimer(LKMCP.plugin, 60 * 20, 60 * 20));
     }
 }

@@ -133,7 +133,7 @@ public class DailySignInBase {
             result.close();
             statement.close();
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在读取表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }
@@ -144,7 +144,7 @@ public class DailySignInBase {
             String arg = "uuid CHAR(36) PRIMARY KEY, point INT, gift INT";
             SQLite.createTable(LKMCP.connection, "dailyData", arg);
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在更新表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class DailySignInBase {
             }
             SQLite.createTable(LKMCP.connection, month, arg.toString());
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在更新表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }
@@ -211,7 +211,7 @@ public class DailySignInBase {
             result.close();
             statement.close();
         } catch (SQLException e) {
-            LKMCP.dailySignInEnable = false;
+            LKMCP.dailySystemEnable = false;
             LKMCP.printLog("在读取表时出现错误，已关闭签到系统");
             e.printStackTrace();
         }

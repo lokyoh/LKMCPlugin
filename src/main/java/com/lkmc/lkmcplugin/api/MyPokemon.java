@@ -1,11 +1,13 @@
 package com.lkmc.lkmcplugin.api;
 
+import com.earth2me.essentials.api.Economy;
 import com.pixelmonmod.api.pokemon.PokemonSpecification;
 import com.pixelmonmod.api.pokemon.PokemonSpecificationProxy;
 import com.pixelmonmod.pixelmon.api.economy.BankAccount;
 import com.pixelmonmod.pixelmon.api.economy.BankAccountProxy;
 import com.pixelmonmod.pixelmon.api.item.JsonItemStack;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
+import com.pixelmonmod.pixelmon.api.pokemon.species.Stats;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.Moveset;
 import com.pixelmonmod.pixelmon.api.storage.PlayerPartyStorage;
 import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
@@ -17,6 +19,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.math.BigDecimal;
+
 public class MyPokemon {
 
     public static Pokemon stringToPokemon(String species) {
@@ -24,8 +28,31 @@ public class MyPokemon {
         return spec.create();
     }
 
+    public static Pokemon stringToPokemon(String species, String palette) {
+        PokemonSpecification spec = PokemonSpecificationProxy.create(species);
+        Pokemon pokemon = spec.create();
+        pokemon.setPalette(palette);
+        return pokemon;
+    }
+
+    public static Pokemon stringToPokemon(String species, String form, String palette) {
+        PokemonSpecification spec = PokemonSpecificationProxy.create(species);
+        Pokemon pokemon = spec.create();
+        pokemon.setForm(form);
+        pokemon.setPalette(palette);
+        return pokemon;
+    }
+
     public static ItemStack getPokemonSprite(String name) {
         return CraftItemStack.asBukkitCopy(SpriteItemHelper.getPhoto(stringToPokemon(name)));
+    }
+
+    public static ItemStack getPokemonSprite(String name, String palette) {
+        return CraftItemStack.asBukkitCopy(SpriteItemHelper.getPhoto(stringToPokemon(name, palette)));
+    }
+
+    public static ItemStack getPokemonSprite(String name, String form, String palette) {
+        return CraftItemStack.asBukkitCopy(SpriteItemHelper.getPhoto(stringToPokemon(name, form, palette)));
     }
 
     public static ItemStack getPokemonSprite(Pokemon pokemon) {
@@ -35,6 +62,14 @@ public class MyPokemon {
     public static void givePokeMoney(Player p, int amount) {
         BankAccount account = BankAccountProxy.getBankAccountUnsafe(p.getUniqueId());
         account.add(amount);
+    }
+
+    public static boolean takePokeMoney(Player p, int amount){
+        BankAccount account = BankAccountProxy.getBankAccountUnsafe(p.getUniqueId());
+        if (account.getBalance().compareTo(BigDecimal.valueOf(amount)) < 0) {
+            return false;
+        }
+        return account.take(amount);
     }
 
     public static void givePokemon(Player p, String species) {
