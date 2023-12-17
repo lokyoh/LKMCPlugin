@@ -22,7 +22,7 @@ public class GrowthTicketUI {
         ItemStack small = ItemBuilder.buildItem("PIXELMON_S_EXP_CANDY", "娇小", Collections.singletonList("点击变为娇小体型"));
         ItemStack ordinary = ItemBuilder.buildItem("PIXELMON_M_EXP_CANDY", "普通", Collections.singletonList("点击变为普通体型"));
         ItemStack huge = ItemBuilder.buildItem("PIXELMON_L_EXP_CANDY", "高大", Collections.singletonList("点击变为高大体型"));
-        ItemStack giant = ItemBuilder.buildItem("PIXELMON_L_EXP_CANDY", "巨大", Collections.singletonList("点击变为巨大体型"));
+        ItemStack giant = ItemBuilder.buildItem("PIXELMON_L_EXP_CANDY", "巨人", Collections.singletonList("点击变为巨人体型"));
         ItemStack enormous = ItemBuilder.buildItem("PIXELMON_XL_EXP_CANDY", "庞大", Collections.singletonList("点击变为庞大体型"));
         ItemStack ginormous = ItemBuilder.buildItem("PIXELMON_XL_EXP_CANDY", "巨大", Collections.singletonList("点击变为巨大体型"));
         for (int i = 0; i < 6; i++) {

@@ -1,13 +1,11 @@
 package com.lkmc.lkmcplugin.api;
 
-import com.earth2me.essentials.api.Economy;
 import com.pixelmonmod.api.pokemon.PokemonSpecification;
 import com.pixelmonmod.api.pokemon.PokemonSpecificationProxy;
 import com.pixelmonmod.pixelmon.api.economy.BankAccount;
 import com.pixelmonmod.pixelmon.api.economy.BankAccountProxy;
 import com.pixelmonmod.pixelmon.api.item.JsonItemStack;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
-import com.pixelmonmod.pixelmon.api.pokemon.species.Stats;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.Moveset;
 import com.pixelmonmod.pixelmon.api.storage.PlayerPartyStorage;
 import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
@@ -99,7 +97,7 @@ public class MyPokemon {
         return CraftItemStack.asBukkitCopy(jsonItemStack.getItemStack());
     }
 
-    public static void changeMove(PixelmonWrapper pokemon) {
+    public static void changeZACIANMove(PixelmonWrapper pokemon) {
         Moveset move = pokemon.getMoveset();
         Attack[] attacks = move.attacks;
         int index = -1;
@@ -120,12 +118,52 @@ public class MyPokemon {
         }
     }
 
-    public static void changeBackMove(PixelmonWrapper pokemon) {
+    public static void changeBackZACIANMove(PixelmonWrapper pokemon) {
         Moveset move = pokemon.getMoveset();
         Attack[] attacks = move.attacks;
         int index = -1;
         for (int i = 0; i < move.size(); i++) {
             if (attacks[i] != null && attacks[i].isAttack(new Attack("Behemoth Blade").getMove())) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            Attack attack = new Attack("Iron Head");
+
+            attack.pp = move.get(index).pp * 3;
+            attack.ppLevel = move.get(index).ppLevel;
+            move.set(index, attack);
+        }
+    }
+
+    public static void changeZAMAZENTAMove(PixelmonWrapper pokemon) {
+        Moveset move = pokemon.getMoveset();
+        Attack[] attacks = move.attacks;
+        int index = -1;
+        for (int i = 0; i < move.size(); i++) {
+            if (attacks[i] != null && attacks[i].isAttack(new Attack("Behemoth Bash").getMove())) {
+                index = -1;
+                break;
+            }
+            if (attacks[i] != null && attacks[i].isAttack(new Attack("Iron Head").getMove())) {
+                index = i;
+            }
+        }
+        if (index >= 0) {
+            Attack attack = new Attack("Behemoth Bash");
+            attack.pp = move.get(index).pp / 3;
+            attack.ppLevel = move.get(index).ppLevel;
+            move.set(index, attack);
+        }
+    }
+
+    public static void changeBackZAMAZENTAMove(PixelmonWrapper pokemon) {
+        Moveset move = pokemon.getMoveset();
+        Attack[] attacks = move.attacks;
+        int index = -1;
+        for (int i = 0; i < move.size(); i++) {
+            if (attacks[i] != null && attacks[i].isAttack(new Attack("Behemoth Bash").getMove())) {
                 index = i;
                 break;
             }

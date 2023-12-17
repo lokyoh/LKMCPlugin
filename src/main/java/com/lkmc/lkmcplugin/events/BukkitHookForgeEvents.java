@@ -39,7 +39,9 @@ public class BukkitHookForgeEvents implements Listener {
             for (PlayerParticipant p : battle.getPlayers()) {
                 for (PixelmonWrapper pokemon : p.getTeamPokemonList()) {
                     if (pokemon.getSpecies().is(PixelmonSpecies.ZACIAN)) {
-                        MyPokemon.changeBackMove(pokemon);
+                        MyPokemon.changeBackZACIANMove(pokemon);
+                    } else if (pokemon.getSpecies().is(PixelmonSpecies.ZAMAZENTA)) {
+                        MyPokemon.changeBackZAMAZENTAMove((pokemon));
                     }
                 }
             }
@@ -91,7 +93,7 @@ public class BukkitHookForgeEvents implements Listener {
             Player p = Bukkit.getPlayer(e.getPlayer().displayName.replaceAll("§.", ""));
             if (p != null) {
                 DailyQuestBase.data.get(p.getUniqueId()).addCatch();
-                MyCaptureEvent myCaptureEvent= new MyCaptureEvent(p.getUniqueId());
+                MyCaptureEvent myCaptureEvent = new MyCaptureEvent(p.getUniqueId());
                 Bukkit.getPluginManager().callEvent(myCaptureEvent);
             }
             return;
@@ -114,7 +116,13 @@ public class BukkitHookForgeEvents implements Listener {
                         Item held = pokemon.getHeldItem();
                         CraftItemStack cis = CraftItemStack.asNewCraftStack(held);
                         if (cis.isSimilar(new ItemStack(Material.getMaterial("PIXELMON_RUSTED_SWORD"))))
-                            MyPokemon.changeMove(pokemon);
+                            MyPokemon.changeZACIANMove(pokemon);
+                    }
+                    if (pokemon.getSpecies().is(PixelmonSpecies.ZAMAZENTA)) {
+                        Item held = pokemon.getHeldItem();
+                        CraftItemStack cis = CraftItemStack.asNewCraftStack(held);
+                        if (cis.isSimilar(new ItemStack(Material.getMaterial("PIXELMON_RUSTED_SHIELD"))))
+                            MyPokemon.changeZAMAZENTAMove(pokemon);
                     }
                 }
             }
@@ -127,7 +135,11 @@ public class BukkitHookForgeEvents implements Listener {
                 for (PixelmonWrapper pokemon : p.getTeamPokemonList()) {
                     if (pokemon.getSpecies().is(PixelmonSpecies.ZACIAN)) {
                         if (pokemon.getForm().is("crowned"))
-                            MyPokemon.changeMove(pokemon);
+                            MyPokemon.changeZACIANMove(pokemon);
+                    }
+                    if (pokemon.getSpecies().is(PixelmonSpecies.ZAMAZENTA)) {
+                        if (pokemon.getForm().is("crowned"))
+                            MyPokemon.changeZAMAZENTAMove(pokemon);
                     }
                     if (p.canMegaEvolve() && pokemon.getSpecies().is(PixelmonSpecies.RAYQUAZA)) {
                         MyPokemon.mega(pokemon);
@@ -142,7 +154,7 @@ public class BukkitHookForgeEvents implements Listener {
                 e.setCanceled(true);
                 return;
             }
-            if(e.moveSkill.id.equalsIgnoreCase("smelt")){
+            if (e.moveSkill.id.equalsIgnoreCase("smelt")) {
                 e.setCanceled(true);
             }
         }
