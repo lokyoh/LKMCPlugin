@@ -18,6 +18,11 @@ gender-ticket:
   id: 'gender_ticket'
   amount: 1
   price: 300
+growth-ticket:
+  type: 'lkItem'
+  id: 'growth_ticket'
+  amount: 1
+  price: 300
 shiny-charm:
   type: 'item'
   id: 'pixelmon_shiny_charm'

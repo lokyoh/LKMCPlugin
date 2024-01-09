@@ -15,6 +15,7 @@ import com.pixelmonmod.pixelmon.api.events.battles.BattleTickEvent;
 import com.pixelmonmod.pixelmon.api.events.moveskills.UseMoveSkillEvent;
 import com.pixelmonmod.pixelmon.api.events.quests.FinishQuestEvent;
 import com.pixelmonmod.pixelmon.api.events.spawning.LegendarySpawnEvent;
+import com.pixelmonmod.pixelmon.api.pokemon.species.Species;
 import com.pixelmonmod.pixelmon.api.registries.PixelmonSpecies;
 import com.pixelmonmod.pixelmon.battles.controller.BattleController;
 import com.pixelmonmod.pixelmon.battles.controller.participants.PixelmonWrapper;
@@ -30,6 +31,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 public class BukkitHookForgeEvents implements Listener {
+    static String player = "";
     @EventHandler
     public static void bukkitHookForgeEvents(BukkitHookForgeEvent forgeEvent) {
         Event event = forgeEvent.getEvent();
@@ -100,10 +102,19 @@ public class BukkitHookForgeEvents implements Listener {
         }
         if (event instanceof LegendarySpawnEvent.ChoosePlayer) {
             LegendarySpawnEvent.ChoosePlayer e = (LegendarySpawnEvent.ChoosePlayer) event;
-            Player p = Bukkit.getPlayer(e.player.displayName.replaceAll("§.", ""));
-            if (p != null) {
-                Bukkit.broadcastMessage("§6本次神兽刷新的天选之子是 " + e.player.displayName.replaceAll("§.", ""));
-                DailyQuestBase.data.get(p.getUniqueId()).addLegendary();
+            player = e.player.displayName.replaceAll("§.", "");
+            Bukkit.broadcastMessage("§6正在尝试生成神兽...没出则生成失败");
+            return;
+        }
+        if (event instanceof LegendarySpawnEvent.DoSpawn) {
+            LegendarySpawnEvent.DoSpawn e = (LegendarySpawnEvent.DoSpawn) event;
+            Player p = Bukkit.getPlayer(player);
+            Species s = e.getLegendary();
+            if(s!=null){
+                if (p != null) {
+                    Bukkit.broadcastMessage("§6本次神兽刷新的天选之子是 " + player);
+                    DailyQuestBase.data.get(p.getUniqueId()).addLegendary();
+                }
             }
             return;
         }

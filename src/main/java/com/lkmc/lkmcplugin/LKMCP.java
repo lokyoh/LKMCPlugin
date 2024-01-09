@@ -31,7 +31,7 @@ public final class LKMCP extends JavaPlugin {
     public static File dailyShopFile;
     public static File acquisition;
     public static Connection connection;
-    private static final long PERIOD_DAY = 24 * 60 * 60 * 20;
+    private static final long PERIOD_DAY = 24 * 60 * 60 * 1000;
     public static Timer timer = new Timer();
     public static int mines;
     public static int crops;
@@ -63,9 +63,6 @@ public final class LKMCP extends JavaPlugin {
         UIItem.init();
         // 抽奖注册与初始化
         prizeFile = new File(getDataFolder(), "prize.yml");
-        if (!prizeFile.exists()) {
-            saveResource("prize.yml", false);
-        }
         DrawBase.init();
         // 每日更新计划任务
         Calendar calendar = Calendar.getInstance();
